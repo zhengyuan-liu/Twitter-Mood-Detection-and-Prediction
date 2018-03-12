@@ -1,6 +1,4 @@
 
 *.csv linguist-language=python
 *.py linguist-language=python
-*.text linguist-language=python
-*.md linguist-language=python
 *.html linguist-language=python
