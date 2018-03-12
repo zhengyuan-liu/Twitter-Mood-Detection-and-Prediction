@@ -1,7 +1,7 @@
-#README#
+# README
 
-##ML.py##
-###Description###
+## ML.py
+### Description
 Conduct both linear regression and logistic regression on 'data.csv'.
 ###Requirements
 numpy, pandas, imbalanced-learn, scikit-learn
