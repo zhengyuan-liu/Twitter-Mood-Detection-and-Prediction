@@ -1,6 +1,8 @@
 # Twitter Mood Detection and Prediction
 Happiness Index Detection and Prediction for Twitter Users
 
+For further details, see project report https://github.com/zhengyuan-liu/Twitter-Mood-Detection-and-Prediction/blob/master/report.pdf
+
 ## Structure of this Project
 * --report.pdf                  The final report in PDF
 * --README.md                   The REAME file for the structure of the submission file (This file)
@@ -39,11 +41,10 @@ selection. First let data_X contain all 10 candidate features. Then use data_X =
 drop one feature. Change the value of the parameter in np.s_[] to drop different features. The code after k-fold cross
 validation loop is used for prediction.
 
-## train.py
+## xgboost_train.py
 ### Description
 Conduct XGBoost (https://xgboost.readthedocs.io/en/latest/).
 ### Requirements
-
 numpy, pandas, xgboost
 
 Install XGBoost
@@ -80,7 +81,7 @@ the console and is saved in file 'XGB.model'.
 ### Usage
 Change the param_grid to search the best parameters.
 
-## predict.py
+## xgboost_predict.py
 ### Description
 Predict happiness index from tweets.
 ### Requirements
@@ -95,9 +96,9 @@ folder './predictions/'.
 Make sure 'XGB.model' is in the same directory, all the test data csv files is in the folder './test_data/' named
 as 'test_*_nlp.csv', and there is a folder './predictions', then run this python file.
 
-## svm_classifier.py
+## svm_train.py
 ### Libraries Needed:
-pandas, numpy, sklearn, imblearn, LIBSVM
+pandas, numpy, sklearn, imblearn
 ### Description:
 This file read our preprocessed corpus, selected features, then do the random oversampling to solve the
 unbalanced data problem, and use the 10-Fold cross validation to compute the accuracy of the model, and finally use all
@@ -112,7 +113,7 @@ Let data_with_nlp.csv in the specified folder, prepare all the libraries needed,
 
 ## svm_test.py
 ### Libraries Needed:
-pandas, sklearn, LIBSVM
+pandas, sklearn
 Description: This file read our testing file (Twitter users' tweets in a timeline), then standardize the input data,
 and use svm model to compute happiness index for every record.
 ### Input:
