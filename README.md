@@ -1,4 +1,5 @@
-# Happiness Index Detection and Prediction for Twitter Users
+# Twitter Mood Detection and Prediction
+Happiness Index Detection and Prediction for Twitter Users
 
 ## Structure of this Project
 * --report.pdf                  The final report in PDF
