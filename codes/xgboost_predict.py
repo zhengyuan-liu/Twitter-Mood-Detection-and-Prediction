@@ -12,7 +12,7 @@ for filename in glob.iglob('../data/Test Data/*.csv'):
     data = data.dropna()
     data['retweet_count'] = pd.to_numeric(data['retweet_count'])
     result = data[['created_at']]
-    result.rename(columns = {'created_at':'dateTime'}, inplace=True)
+    result.rename(columns={'created_at':'dateTime'}, inplace=True)
 
     predictions = clf.predict(data.drop('created_at', axis=1)) - 2
 

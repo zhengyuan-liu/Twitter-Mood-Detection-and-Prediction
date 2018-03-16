@@ -3,8 +3,10 @@ import numpy as np
 from sklearn.model_selection import KFold
 from sklearn.utils import shuffle
 from sklearn.preprocessing import StandardScaler
+from sklearn.svm import SVC
+from sklearn.externals import joblib
+from sklearn.metrics import accuracy_score
 from imblearn.over_sampling import RandomOverSampler
-from svmutil import *
 
 
 def get_weak_accuracy(p_label, test_label):
@@ -14,6 +16,7 @@ def get_weak_accuracy(p_label, test_label):
         if p_label[i] == test_label[i] or p_label[i] * test_label[i] > 0:
             count += 1.0
     return count/sum
+
 
 if __name__ == '__main__':
 
@@ -48,9 +51,10 @@ if __name__ == '__main__':
         ros = RandomOverSampler()
         X_resampled, Y_resampled = ros.fit_sample(train_feature, train_label)
 
-        model = svm_train(Y_resampled.tolist(), X_resampled.tolist(), '-c 4 -q')  # train the svm
-        p_label, p_acc, p_val = svm_predict(test_label.tolist(), test_feature.tolist(), model)  # predict on test set
-        accuracy.append(p_acc[0])
+        model = SVC().fit(X_resampled, Y_resampled)  # train the svm
+        p_label = model.predict(test_feature)  # predict on test set
+        p_acc = accuracy_score(test_label, p_label)  # accuracy
+        accuracy.append(p_acc)
         weak_accuracy.append(get_weak_accuracy(p_label, test_label))
         print('New Accuracy: ', weak_accuracy[-1])
 
@@ -60,6 +64,5 @@ if __name__ == '__main__':
     # train and save the final svm model
     ros = RandomOverSampler()
     X_resampled, Y_resampled = ros.fit_sample(data_X, data_Y)
-    final_model = svm_train(Y_resampled.tolist(), X_resampled.tolist(), '-c 4 -q')  # train the final svm
-    svm_save_model('happiness_index_svm.model', final_model)
-
+    final_model = SVC().fit(X_resampled, Y_resampled)  # train the final svm
+    joblib.dump(final_model, "happiness_index_svm.model")

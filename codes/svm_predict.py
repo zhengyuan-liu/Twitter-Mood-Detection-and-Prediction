@@ -1,6 +1,7 @@
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
-from svmutil import *
+from sklearn.svm import SVC
+from sklearn.externals import joblib
 
 if __name__ == '__main__':
 
@@ -18,8 +19,8 @@ if __name__ == '__main__':
     data_X = scaler.transform(data_X)
 
     # load svm model
-    model = svm_load_model('../codes/Model/happiness_index_svm.model')
-    p_label, p_acc, p_val = svm_predict([0]*len(data_X.tolist()), data_X.tolist(), model)
+    model = joblib.load('../codes/Model/happiness_index_svm.model')
+    p_label = model.predict(data_X)
 
     # output result to file
     result = data[['created_at']]
